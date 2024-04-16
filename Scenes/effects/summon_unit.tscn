@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3u2cfl1moqur"]
+
+[ext_resource type="Script" path="res://Scripts/effects/summon_unit_effect.gd" id="1_tmwvt"]
+
+[node name="effect" type="Node"]
+script = ExtResource("1_tmwvt")

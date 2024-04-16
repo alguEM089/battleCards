@@ -1,0 +1,5 @@
+res://Scenes/battle_table.tscn
+res://Scripts/returnclass.gd
+res://Scripts/global.gd
+res://Scripts/recharge line bg.gd
+res://Scripts/info.gd

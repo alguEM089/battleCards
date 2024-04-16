@@ -1,0 +1,228 @@
+[gd_scene load_steps=10 format=3 uid="uid://beb8w1x1mlhlm"]
+
+[ext_resource type="Texture2D" uid="uid://b8b8l4is5qjsi" path="res://Assets/base_letter.png" id="1_bi0l6"]
+[ext_resource type="Script" path="res://Scripts/tabuleiro.gd" id="1_onsnb"]
+[ext_resource type="PackedScene" uid="uid://btirj2ajv7aig" path="res://Scenes/unit.tscn" id="1_p8e50"]
+[ext_resource type="Texture2D" uid="uid://cdudbaw03kpd8" path="res://Assets/mana cristal.png" id="2_c1lso"]
+[ext_resource type="Script" path="res://Scripts/hand_controler.gd" id="3_6wquk"]
+[ext_resource type="Script" path="res://Scripts/recharge line bg.gd" id="3_tw843"]
+[ext_resource type="PackedScene" uid="uid://d3b77joabtd44" path="res://Scenes/recharge_letter_contain.tscn" id="4_80fc2"]
+[ext_resource type="Script" path="res://Scripts/label_mana.gd" id="5_hlen8"]
+[ext_resource type="Script" path="res://Scenes/info.gd" id="8_3pnmy"]
+
+[node name="battle table" type="Node2D"]
+
+[node name="bg" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="unitsbg" type="Node2D" parent="bg"]
+
+[node name="bg1" type="ColorRect" parent="bg/unitsbg"]
+offset_left = 256.0
+offset_top = 176.0
+offset_right = 352.0
+offset_bottom = 272.0
+color = Color(0.164706, 0.164706, 0.164706, 1)
+
+[node name="bg2" type="ColorRect" parent="bg/unitsbg"]
+offset_left = 392.0
+offset_top = 176.0
+offset_right = 488.0
+offset_bottom = 272.0
+color = Color(0.164706, 0.164706, 0.164706, 1)
+
+[node name="bg3" type="ColorRect" parent="bg/unitsbg"]
+offset_left = 528.0
+offset_top = 176.0
+offset_right = 624.0
+offset_bottom = 272.0
+color = Color(0.164706, 0.164706, 0.164706, 1)
+
+[node name="bg4" type="ColorRect" parent="bg/unitsbg"]
+offset_left = 664.0
+offset_top = 176.0
+offset_right = 760.0
+offset_bottom = 272.0
+color = Color(0.164706, 0.164706, 0.164706, 1)
+
+[node name="bg5" type="ColorRect" parent="bg/unitsbg"]
+offset_left = 256.0
+offset_top = 304.0
+offset_right = 352.0
+offset_bottom = 400.0
+color = Color(0.164706, 0.164706, 0.164706, 1)
+
+[node name="bg6" type="ColorRect" parent="bg/unitsbg"]
+offset_left = 392.0
+offset_top = 304.0
+offset_right = 488.0
+offset_bottom = 400.0
+color = Color(0.164706, 0.164706, 0.164706, 1)
+
+[node name="bg7" type="ColorRect" parent="bg/unitsbg"]
+offset_left = 528.0
+offset_top = 304.0
+offset_right = 624.0
+offset_bottom = 400.0
+color = Color(0.164706, 0.164706, 0.164706, 1)
+
+[node name="bg8" type="ColorRect" parent="bg/unitsbg"]
+offset_left = 664.0
+offset_top = 304.0
+offset_right = 760.0
+offset_bottom = 400.0
+color = Color(0.164706, 0.164706, 0.164706, 1)
+
+[node name="bg9" type="ColorRect" parent="bg/unitsbg"]
+offset_left = 800.0
+offset_top = 176.0
+offset_right = 896.0
+offset_bottom = 272.0
+color = Color(0.164706, 0.164706, 0.164706, 1)
+
+[node name="bg10" type="ColorRect" parent="bg/unitsbg"]
+offset_left = 800.0
+offset_top = 304.0
+offset_right = 896.0
+offset_bottom = 400.0
+color = Color(0.164706, 0.164706, 0.164706, 1)
+
+[node name="tabuleiro" type="ColorRect" parent="bg"]
+self_modulate = Color(0, 0, 0, 0.619608)
+layout_mode = 0
+offset_left = 232.0
+offset_top = 128.0
+offset_right = 920.0
+offset_bottom = 448.0
+color = Color(0.239216, 0.239216, 0.239216, 1)
+script = ExtResource("1_onsnb")
+
+[node name="unit1" parent="bg/tabuleiro" instance=ExtResource("1_p8e50")]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 48.0
+offset_right = 56.0
+offset_bottom = 80.0
+
+[node name="unit2" parent="bg/tabuleiro" instance=ExtResource("1_p8e50")]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 48.0
+offset_right = 192.0
+offset_bottom = 80.0
+
+[node name="unit3" parent="bg/tabuleiro" instance=ExtResource("1_p8e50")]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 48.0
+offset_right = 328.0
+offset_bottom = 80.0
+
+[node name="unit4" parent="bg/tabuleiro" instance=ExtResource("1_p8e50")]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 48.0
+offset_right = 464.0
+offset_bottom = 80.0
+
+[node name="unit5" parent="bg/tabuleiro" instance=ExtResource("1_p8e50")]
+layout_mode = 0
+offset_left = 568.0
+offset_top = 48.0
+offset_right = 600.0
+offset_bottom = 80.0
+
+[node name="unit6" parent="bg/tabuleiro" instance=ExtResource("1_p8e50")]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 176.0
+offset_right = 56.0
+offset_bottom = 208.0
+
+[node name="unit7" parent="bg/tabuleiro" instance=ExtResource("1_p8e50")]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 176.0
+offset_right = 192.0
+offset_bottom = 208.0
+
+[node name="unit8" parent="bg/tabuleiro" instance=ExtResource("1_p8e50")]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 176.0
+offset_right = 328.0
+offset_bottom = 208.0
+
+[node name="unit9" parent="bg/tabuleiro" instance=ExtResource("1_p8e50")]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 176.0
+offset_right = 464.0
+offset_bottom = 208.0
+
+[node name="unit10" parent="bg/tabuleiro" instance=ExtResource("1_p8e50")]
+layout_mode = 0
+offset_left = 568.0
+offset_top = 176.0
+offset_right = 600.0
+offset_bottom = 208.0
+
+[node name="recharge line bg" type="ColorRect" parent="."]
+offset_left = 64.0
+offset_top = 12.0
+offset_right = 128.0
+offset_bottom = 512.0
+color = Color(0.4, 0.4, 0, 1)
+script = ExtResource("3_tw843")
+
+[node name="1" parent="recharge line bg" instance=ExtResource("4_80fc2")]
+
+[node name="2" parent="recharge line bg" instance=ExtResource("4_80fc2")]
+
+[node name="3" parent="recharge line bg" instance=ExtResource("4_80fc2")]
+
+[node name="4" parent="recharge line bg" instance=ExtResource("4_80fc2")]
+
+[node name="5" parent="recharge line bg" instance=ExtResource("4_80fc2")]
+
+[node name="deck" type="Sprite2D" parent="."]
+position = Vector2(96, 576)
+texture = ExtResource("1_bi0l6")
+
+[node name="mana" type="TextureButton" parent="."]
+offset_left = 1024.0
+offset_top = 528.0
+offset_right = 1088.0
+offset_bottom = 624.0
+texture_normal = ExtResource("2_c1lso")
+
+[node name="label_mana" type="Label" parent="mana"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 48.0
+scale = Vector2(2, 2)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_hlen8")
+
+[node name="hand_controler" type="Node2D" parent="."]
+script = ExtResource("3_6wquk")
+
+[node name="label_description" type="Label" parent="."]
+visible = false
+offset_left = 960.0
+offset_right = 1152.0
+offset_bottom = 512.0
+text = "Descrição "
+autowrap_mode = 3
+
+[node name="info" type="Label" parent="."]
+offset_left = 232.0
+offset_right = 920.0
+offset_bottom = 128.0
+script = ExtResource("8_3pnmy")
+
+[connection signal="pressed" from="mana" to="mana/label_mana" method="_on_mana_pressed"]
