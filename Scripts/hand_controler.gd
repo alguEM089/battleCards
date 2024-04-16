@@ -1,4 +1,7 @@
 extends Node2D
+class_name HandControler
+
+signal IsLetterOk
 
 ## Referencia ao Label que mostra ao jogador a descrição das cartas
 @onready var label_description: Label = $"../label_description"
@@ -6,9 +9,6 @@ extends Node2D
 # func ready
 func _ready() -> void:
 	Global.hand_controler = self
-	for _a in range(Global.buy_letters_count):
-		instance_letter()
-	adjust_letters_pos()
 
 ## instancia uma nova carta e a configura
 func instance_letter() -> void:
@@ -16,6 +16,7 @@ func instance_letter() -> void:
 		var new_letter = Global.LETTER_SCENES[Global.buy_letter()].instantiate()
 
 		add_child(new_letter)
+		new_letter.global_position = Vector2(64, 528)
 		new_letter.connect("tree_exited", adjust_letters_pos)
 
 ## Ajusta a posição das cartas baseado na quantia de cartas na mão do jogador
@@ -25,8 +26,11 @@ func adjust_letters_pos() -> void:
 		ajuste = 35
 
 	for letter in get_children():
-		letter.global_position.x = (576 - (70 * int(float(get_child_count()) / 2))) + (letter.get_index() * 70) - ajuste
-		letter.global_position.y = 528
+		var tween = create_tween()
+		if tween:
+			tween.tween_property(letter, "position", Vector2(576 - (70 * int(float(get_child_count()) / 2)) + (letter.get_index() * 70) - ajuste, 528), 0.1).from(letter.position)
+			await tween.finished
+	emit_signal("IsLetterOk")
 
 ## garante que apenas uma carta esteja selecionada por vez
 ## recebe um prametro do id da carta seleciona (-1 não selecionada nenhuma carta)

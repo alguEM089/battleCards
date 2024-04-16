@@ -1,6 +1,7 @@
 extends ColorRect
-
 class_name RechargeLine
+
+signal UpdateLetterPos
 
 func _ready() -> void:
 	Global.recharge_line = self
@@ -12,6 +13,19 @@ func _unhandled_input(event: InputEvent) -> void:
 			c.show_letters()
 
 ## atualiza as cartas no jogo que estão na linha de recarga
+func update_letters_pos() -> void:
+	for n in range(5):
+		get_child(n).is_show_letters = false
+		for l in get_child(n).get_children():
+			var tween = create_tween()
+			
+			tween.tween_property(l, "position", Vector2(0, l.position.y + 100), 0.1).from(l.position)
+			await tween.finished
+			if l.position.y >= 500:
+				l.queue_free()
+
+	emit_signal("UpdateLetterPos")
+
 func update_letters_in_recharge() -> void:
 	for n in range(5):
 		get_child(n).is_show_letters = false
@@ -19,6 +33,8 @@ func update_letters_in_recharge() -> void:
 			l.queue_free()
 
 	for space in range(5):
+		for letter in get_child(space).get_children():
+			letter.queue_free()
 		for letter in Global.letter_in_recharge[space]:
 			var new_sprite = Sprite2D.new()
 			get_child(space).add_child(new_sprite)
@@ -39,7 +55,7 @@ func update_recharge_line() -> void:
 
 func _return_leter_deck(l:String) -> int:
 	var letter_return = Global.LETTER_ATRIBUTES[l]["deck_return"]
-	
+
 	match letter_return:
 		"comum":
 			return ReturnDeck.comun()
@@ -48,7 +64,4 @@ func _return_leter_deck(l:String) -> int:
 		"botton":
 			return ReturnDeck.botton()
 		_:
-			return -1
-
-
-
+			return ReturnDeck.comun()

@@ -2,7 +2,10 @@ extends Node
 class_name ReturnDeckClass
 
 func comun() -> int:
-	return randi_range(Global.letter_in_deck.size() - 2, Global.letter_in_deck.size())
+	if Global.letter_in_deck.size() > 3:
+		return randi_range(Global.letter_in_deck.size() - 2, Global.letter_in_deck.size())
+	else:
+		return Global.letter_in_deck.size()
 
 func botton() -> int:
 	return Global.letter_in_deck.size()

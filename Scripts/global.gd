@@ -1,14 +1,16 @@
 extends Node
 
 #region Referencia de nós
+## O controlador geral do jogo
+var Controler : GameControler
 ## O tabuleiro onde são invocada as unidades
 var tabuleiro : ColorRect
 ## Label que mostra a quantia de mana atual
-var label_mana : Label
+var mana_contain : TextureButton
 ## Linha de racarga que mostra o tempo (em rodadas) para as cartas usadas voltarem para mesa
 var recharge_line : RechargeLine
 ## Nó que controla as cartas que estão na mão do jogador
-var hand_controler : Node2D
+var hand_controler : HandControler
 #endregion
 
 #region Dicionarios de controle de atributos
@@ -21,12 +23,12 @@ const LETTER_ATRIBUTES = {
 	},
 	"shilder" : {
 		"description" : "Invoca uma unidade de 1 ataque, com 1 de dano e 3 defesa.",
-		"mana_cost" : 1, "recharge_time" : 1, "deck_return" : "comum",
+		"mana_cost" : 1, "recharge_time" : 3, "deck_return" : "comum",
 		"deck_buy" : 0, "type" : "Unidade"
 	},
 	"spikeBall" : {
 		"description" : "Invoca uma unidade que causa 1 ataque a quem o ataca. Não pode atacar.",
-		"mana_cost" : 1, "recharge_time" : 1, "deck_return" : "comum",
+		"mana_cost" : 1, "recharge_time" : 4, "deck_return" : "comum",
 		"deck_buy" : 0, "type" : "Unidade"
 	},
 	"undeadSoldier" : {
@@ -71,6 +73,11 @@ const UNITS_ATRIBUTES = {
 #endregion
 
 #region Variaveis de controle de cartas em partida
+
+const MAX_HAND_LETTER := 10
+## Controla a quantidade de cartas que o jogador vai comprar por rodada
+var buy_letters_count := 2.0
+
 ## Controla as cartas que esta na mão do jogador
 var letter_in_hand := []
 ## Controla as cartas que atualmente estão no deck, que o jogador pode comprar
@@ -86,28 +93,22 @@ var units_space := [
 ### na região "Dicionarios de controle de atributos"
 #endregion
 
-## Constante que diz o maximo de mana que o jogador pode ter por rodada
-const MAX_MANA := 10
 ## Variavel que contem as cartas escolhidas para a partida atual
 var deck := [
-	"spikeBall", "shilder", "undeadSoldier", "soldier", "shilder",
-	"soldier", "spikeBall", "shilder", "soldier", "soldier",
-	"spikeBall", "shilder", "undeadSoldier", "soldier", "shilder",
-	"soldier", "spikeBall", "shilder", "soldier", "soldier",
 	"spikeBall", "shilder", "undeadSoldier", "soldier", "shilder",
 	"soldier", "spikeBall", "shilder", "soldier", "soldier"
 ]
 
+## Constante que diz o maximo de mana que o jogador pode ter por rodada
+const MAX_MANA := 10
 ## controla a mana atual do jogador
-var mana := 10
-## Controla a quantidade de cartas que o jogador vai comprar por rodada
-var buy_letters_count := 2
+var mana := 0
+
+var mana_gain := 2.0
 
 # func ready
 func _ready() -> void:
 	set_deck()
-	for a in range(10):
-		print(ReturnDeck.priority())
 
 ## define o deck do jogo atual como o deck escolhido pelo jogador
 func set_deck() -> void:
@@ -122,8 +123,8 @@ func buy_letter() -> String:
 	return next_letter
 
 ## Atualiza a mana do jogador, o Label de mana da HUD e impede que tenha mais mana do que "MAX_MANA"
-func update_mana(mana_use: int) -> void:
+func update_mana(mana_use: int = 0) -> void:
 	mana -= mana_use
 	if mana > MAX_MANA:
 		mana = MAX_MANA
-	label_mana.update_text()
+	mana_contain.update_text()

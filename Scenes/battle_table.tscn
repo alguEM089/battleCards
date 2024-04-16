@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://beb8w1x1mlhlm"]
+[gd_scene load_steps=11 format=3 uid="uid://beb8w1x1mlhlm"]
 
+[ext_resource type="Script" path="res://Scripts/controler.gd" id="1_41ca1"]
 [ext_resource type="Texture2D" uid="uid://b8b8l4is5qjsi" path="res://Assets/base_letter.png" id="1_bi0l6"]
 [ext_resource type="Script" path="res://Scripts/tabuleiro.gd" id="1_onsnb"]
 [ext_resource type="PackedScene" uid="uid://btirj2ajv7aig" path="res://Scenes/unit.tscn" id="1_p8e50"]
@@ -7,10 +8,11 @@
 [ext_resource type="Script" path="res://Scripts/hand_controler.gd" id="3_6wquk"]
 [ext_resource type="Script" path="res://Scripts/recharge line bg.gd" id="3_tw843"]
 [ext_resource type="PackedScene" uid="uid://d3b77joabtd44" path="res://Scenes/recharge_letter_contain.tscn" id="4_80fc2"]
-[ext_resource type="Script" path="res://Scripts/label_mana.gd" id="5_hlen8"]
+[ext_resource type="Script" path="res://Scripts/mana.gd" id="5_hlen8"]
 [ext_resource type="Script" path="res://Scripts/info.gd" id="8_3pnmy"]
 
 [node name="battle table" type="Node2D"]
+script = ExtResource("1_41ca1")
 
 [node name="bg" type="ColorRect" parent="."]
 offset_right = 1152.0
@@ -197,6 +199,7 @@ offset_top = 528.0
 offset_right = 1088.0
 offset_bottom = 624.0
 texture_normal = ExtResource("2_c1lso")
+script = ExtResource("5_hlen8")
 
 [node name="label_mana" type="Label" parent="mana"]
 layout_mode = 0
@@ -206,7 +209,6 @@ scale = Vector2(2, 2)
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("5_hlen8")
 
 [node name="hand_controler" type="Node2D" parent="."]
 script = ExtResource("3_6wquk")
@@ -226,4 +228,4 @@ offset_bottom = 128.0
 autowrap_mode = 3
 script = ExtResource("8_3pnmy")
 
-[connection signal="pressed" from="mana" to="mana/label_mana" method="_on_mana_pressed"]
+[connection signal="pressed" from="mana" to="mana" method="_on_pressed"]
