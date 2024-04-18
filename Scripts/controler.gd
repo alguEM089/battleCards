@@ -31,6 +31,7 @@ func turn_init(limitMana:=true) -> void:
 	if (Global.mana > Global.MAX_MANA) and limitMana:
 		Global.mana = Global.MAX_MANA
 	Global.update_mana()
+	Global.hide_next_letters()
 	_buy_letters(int(Global.buy_letters_count))
 
 func _buy_letters(quant:int, buy:=can_buy) -> void:

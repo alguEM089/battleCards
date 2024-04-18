@@ -1,5 +1,8 @@
 extends Node
 
+enum AttackEffects {DIE_ON_ATTACK}
+enum DefenceEffects {SPIKE}
+
 #region Referencia de nós
 ## O controlador geral do jogo
 var Controler : GameControler
@@ -11,6 +14,8 @@ var mana_contain : TextureButton
 var recharge_line : RechargeLine
 ## Nó que controla as cartas que estão na mão do jogador
 var hand_controler : HandControler
+## Controlador da textura do deck
+var deck_controler : TextureButton
 #endregion
 
 #region Dicionarios de controle de atributos
@@ -23,12 +28,12 @@ const LETTER_ATRIBUTES = {
 	},
 	"shilder" : {
 		"description" : "Invoca uma unidade de 1 ataque, com 1 de dano e 3 defesa.",
-		"mana_cost" : 1, "recharge_time" : 3, "deck_return" : "comum",
+		"mana_cost" : 1, "recharge_time" : 1, "deck_return" : "comum",
 		"deck_buy" : 0, "type" : "Unidade"
 	},
 	"spikeBall" : {
 		"description" : "Invoca uma unidade que causa 1 ataque a quem o ataca. Não pode atacar.",
-		"mana_cost" : 1, "recharge_time" : 4, "deck_return" : "comum",
+		"mana_cost" : 1, "recharge_time" : 2, "deck_return" : "comum",
 		"deck_buy" : 0, "type" : "Unidade"
 	},
 	"undeadSoldier" : {
@@ -39,6 +44,7 @@ const LETTER_ATRIBUTES = {
 }
 ## Dicionário que contem o precarregamento das texturas das cartas
 const LETTER_SPRITES = {
+	"none" : preload("res://Assets/cartas_back.png"),
 	"soldier" : preload("res://Assets/soldier_letter.png"),
 	"shilder" : preload("res://Assets/shilder_letter.png"),
 	"spikeBall" : preload("res://Assets/spikeBall_letter.png"),
@@ -55,19 +61,23 @@ const LETTER_SCENES := {
 const UNITS_ATRIBUTES = {
 	"soldier" : {
 		"texture" : preload("res://Assets/soldier.png"),
-		"power" : 3, "atacks" : 1, "defence" : 1
+		"power" : 3, "attacks" : 1, "defence" : 1,
+		"attack_effect" : -1, "defence_effect" : -1
 	},
 	"shilder" : {
 		"texture" : preload("res://Assets/shilder.png"),
-		"power" : 1, "atacks" : 1, "defence" : 3
+		"power" : 1, "attacks" : 1, "defence" : 3,
+		"attack_effect" : -1, "defence_effect" : -1
 	},
 	"spikeBall" : {
 		"texture" : preload("res://Assets/spike_ball.png"),
-		"power" : 0, "atacks" : 1, "defence" : 3
+		"power" : 0, "attacks" : 1, "defence" : 3,
+		"attack_effect" : -1, "defence_effect" : DefenceEffects.SPIKE
 	},
 	"undeadSoldier" : {
 		"texture" : preload("res://Assets/undeadSoldierl.png"),
-		"power" : 5, "atacks" : 1, "defence" : 1
+		"power" : 5, "attacks" : 1, "defence" : 1,
+		"attack_effect" : AttackEffects.DIE_ON_ATTACK, "defence_effect" : -1
 	}
 }
 #endregion
@@ -128,3 +138,7 @@ func update_mana(mana_use: int = 0) -> void:
 	if mana > MAX_MANA:
 		mana = MAX_MANA
 	mana_contain.update_text()
+
+func hide_next_letters() -> void:
+	deck_controler.hide_next_letters()
+	deck_controler.button_pressed = false

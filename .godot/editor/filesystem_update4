@@ -1,9 +1,10 @@
 res://Scenes/battle_table.tscn
+res://Scripts/deck.gd
+res://Scenes/unit.tscn
+res://Scripts/units.gd
 res://Scripts/global.gd
-res://Scripts/controler.gd
-res://Scripts/hand_controler.gd
-res://Scripts/label_mana.gd
-res://Scripts/mana.gd
-res://Scripts/recharge line bg.gd
-res://Scripts/returnclass.gd
-res://Scripts/info.gd
+res://Scripts/letterclass.gd
+res://Scripts/units_effects/effect_on_attack.gd
+res://Scripts/units_effects/effect_on_defence.gd
+res://Scripts/tabuleiro.gd
+res://Scripts/effects/summon_unit_effect.gd

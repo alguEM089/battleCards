@@ -1,7 +1,7 @@
+ColorRect
 Node
+TextureButton
+Sprite2D
 Node2D
 Label
-TextureButton
-ColorRect
 AnimationPlayer
-Sprite2D

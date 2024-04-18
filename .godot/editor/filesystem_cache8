@@ -1,10 +1,11 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1713290760
+::res://::1713459520
 icon.svg::CompressedTexture2D::7121625129367806516::1712430492::1712430504::1::::<><>::
-::res://Assets/::1713215086
+::res://Assets/::1713461860
 base_letter.png::CompressedTexture2D::4706741742390633776::1713107099::1713107158::1::::<><>::
 cartas_back.png::CompressedTexture2D::4522185821294177018::1713104520::1713103851::1::::<><>::
 cartas_back_select.png::CompressedTexture2D::826725438063493894::1713104576::1713104578::1::::<><>::
+clear_texture.png::CompressedTexture2D::4955290678323166835::1713461828::1713461862::1::::<><>::
 mana cristal.png::CompressedTexture2D::5024879425313109747::1712432279::1713103851::1::::<><>::
 shilder.png::CompressedTexture2D::534514540875266477::1713138785::1713138834::1::::<><>::
 shilder_letter.png::CompressedTexture2D::3704244064482494446::1713180091::1713180222::1::::<><>::
@@ -14,10 +15,10 @@ spikeBall_letter.png::CompressedTexture2D::4878518009178369744::1713213526::1713
 spike_ball.png::CompressedTexture2D::7858589086247204356::1713213347::1713213385::1::::<><>::
 undeadSoldierl.png::CompressedTexture2D::8491685726358423212::1713215071::1713215086::1::::<><>::
 undeadSoldier_letter.png::CompressedTexture2D::5587957277190534467::1713214923::1713215086::1::::<><>::
-::res://Scenes/::1713293566
-battle_table.tscn::PackedScene::2671284786561894582::1713293687::0::1::::<><>::res://Scripts/controler.gd<>uid://b8b8l4is5qjsi::::res://Assets/base_letter.png<>res://Scripts/tabuleiro.gd<>uid://btirj2ajv7aig::::res://Scenes/unit.tscn<>uid://cdudbaw03kpd8::::res://Assets/mana cristal.png<>res://Scripts/hand_controler.gd<>res://Scripts/recharge line bg.gd<>uid://d3b77joabtd44::::res://Scenes/recharge_letter_contain.tscn<>res://Scripts/label_mana.gd<>res://Scripts/info.gd
+::res://Scenes/::1713461793
+battle_table.tscn::PackedScene::2671284786561894582::1713461761::0::1::::<><>::res://Scripts/controler.gd<>uid://b8b8l4is5qjsi::::res://Assets/base_letter.png<>res://Scripts/tabuleiro.gd<>uid://btirj2ajv7aig::::res://Scenes/unit.tscn<>uid://cdudbaw03kpd8::::res://Assets/mana cristal.png<>res://Scripts/hand_controler.gd<>res://Scripts/recharge line bg.gd<>uid://d3b77joabtd44::::res://Scenes/recharge_letter_contain.tscn<>res://Scripts/mana.gd<>uid://b5ot0fgg1d06a::::res://Assets/cartas_back.png<>res://Scripts/deck.gd<>res://Scripts/info.gd
 recharge_letter_contain.tscn::PackedScene::9128614634211253931::1713209729::0::1::::<><>::res://Scripts/recharge_letter_contain.gd
-unit.tscn::PackedScene::3737573414439062278::1713141114::0::1::::<><>::
+unit.tscn::PackedScene::3737573414439062278::1713461793::0::1::::<><>::res://Scripts/units.gd<>res://Scripts/units_effects/effect_on_attack.gd<>res://Scripts/units_effects/effect_on_defence.gd
 ::res://Scenes/effects/::1713213744
 summon_unit.tscn::PackedScene::9167480439225435561::1713213744::0::1::::<><>::res://Scripts/effects/summon_unit_effect.gd
 ::res://Scenes/letters/::1713216019
@@ -25,16 +26,18 @@ shilder_letter.tscn::PackedScene::6788082929867377151::1713215708::0::1::::<><>:
 soldier_letter.tscn::PackedScene::5245772290232427192::1713215708::0::1::::<><>::uid://b8b8l4is5qjsi::::res://Assets/base_letter.png<>res://Scripts/letter_scripts/soldier.gd<>uid://d3u2cfl1moqur::::res://Scenes/effects/summon_unit.tscn
 spikeBall_letter.tscn::PackedScene::3009662919462552018::1713215708::0::1::::<><>::uid://b8b8l4is5qjsi::::res://Assets/base_letter.png<>res://Scripts/letter_scripts/spikeBall_letter.gd<>uid://d3u2cfl1moqur::::res://Scenes/effects/summon_unit.tscn
 undeadSoldier_letter.tscn::PackedScene::1190577103863582734::1713216019::0::1::::<><>::uid://b8b8l4is5qjsi::::res://Assets/base_letter.png<>res://Scripts/letter_scripts/undeadSoldier.gd<>uid://d3u2cfl1moqur::::res://Scenes/effects/summon_unit.tscn
-::res://Scripts/::1713293557
-global.gd::GDScript::-1::1713293431::0::1::::<>Node<>::
-hand_controler.gd::GDScript::-1::1713292992::0::1::::<>Node2D<>::
-info.gd::GDScript::-1::1713217938::0::1::::<>Label<>::
-label_mana.gd::GDScript::-1::1713293336::0::1::::<>TextureButton<>::
-letterclass.gd::GDScript::-1::1713209480::0::1::::BaseLetter<>TextureButton<>::
-recharge line bg.gd::GDScript::-1::1713217749::0::1::::RechargeLine<>ColorRect<>::
+::res://Scripts/::1713461760
+controler.gd::GDScript::-1::1713377108::0::1::::GameControler<>Node2D<>::
+deck.gd::GDScript::-1::1713460393::0::1::::<>TextureButton<>::
+global.gd::GDScript::-1::1713460759::0::1::::<>Node<>::
+hand_controler.gd::GDScript::-1::1713294111::0::1::::HandControler<>Node2D<>::
+info.gd::GDScript::-1::1713297069::0::1::::<>Label<>::
+letterclass.gd::GDScript::-1::1713461042::0::1::::BaseLetter<>TextureButton<>::
+mana.gd::GDScript::-1::1713296342::0::1::::<>TextureButton<>::
+recharge line bg.gd::GDScript::-1::1713299158::0::1::::RechargeLine<>ColorRect<>::
 recharge_letter_contain.gd::GDScript::-1::1713207873::0::1::::<>Node2D<>::
-controler.gd::GDScript::-1::1713293622::0::1::::GameControler<>Node2D<>::
-returnclass.gd::GDScript::-1::1713217251::0::1::::ReturnDeckClass<>Node<>::
+units.gd::GDScript::-1::1713461760::0::1::::<>TextureButton<>::
+returnclass.gd::GDScript::-1::1713294741::0::1::::ReturnDeckClass<>Node<>::
 tabuleiro.gd::GDScript::-1::1713180550::0::1::::<>ColorRect<>::
 ::res://Scripts/effects/::1713213900
 effect.gd::GDScript::-1::1713209234::0::1::::Effects<>Node<>::
@@ -44,3 +47,6 @@ shilder.gd::GDScript::-1::1713209612::0::1::::<>BaseLetter<>::
 soldier.gd::GDScript::-1::1713209501::0::1::::<>BaseLetter<>::
 spikeBall_letter.gd::GDScript::-1::1713213631::0::1::::<>BaseLetter<>::
 undeadSoldier.gd::GDScript::-1::1713215569::0::1::::<>BaseLetter<>::
+::res://Scripts/units_effects/::1713461534
+effect_on_attack.gd::GDScript::-1::1713461534::0::1::::<>Node<>::
+effect_on_defence.gd::GDScript::-1::1713461510::0::1::::<>Node<>::

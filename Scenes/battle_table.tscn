@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://beb8w1x1mlhlm"]
+[gd_scene load_steps=13 format=3 uid="uid://beb8w1x1mlhlm"]
 
 [ext_resource type="Script" path="res://Scripts/controler.gd" id="1_41ca1"]
 [ext_resource type="Texture2D" uid="uid://b8b8l4is5qjsi" path="res://Assets/base_letter.png" id="1_bi0l6"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://Scripts/recharge line bg.gd" id="3_tw843"]
 [ext_resource type="PackedScene" uid="uid://d3b77joabtd44" path="res://Scenes/recharge_letter_contain.tscn" id="4_80fc2"]
 [ext_resource type="Script" path="res://Scripts/mana.gd" id="5_hlen8"]
+[ext_resource type="Texture2D" uid="uid://b5ot0fgg1d06a" path="res://Assets/cartas_back.png" id="6_vf1dm"]
+[ext_resource type="Script" path="res://Scripts/deck.gd" id="7_qd8rx"]
 [ext_resource type="Script" path="res://Scripts/info.gd" id="8_3pnmy"]
 
 [node name="battle table" type="Node2D"]
@@ -189,8 +191,41 @@ script = ExtResource("3_tw843")
 
 [node name="5" parent="recharge line bg" instance=ExtResource("4_80fc2")]
 
-[node name="deck" type="Sprite2D" parent="."]
-position = Vector2(96, 576)
+[node name="deck" type="TextureButton" parent="."]
+offset_left = 64.0
+offset_top = 528.0
+offset_right = 128.0
+offset_bottom = 624.0
+toggle_mode = true
+texture_normal = ExtResource("6_vf1dm")
+script = ExtResource("7_qd8rx")
+
+[node name="bg" type="ColorRect" parent="deck"]
+visible = false
+layout_mode = 0
+offset_top = -128.0
+offset_right = 368.0
+offset_bottom = -16.0
+color = Color(0.560784, 0.560784, 0.560784, 1)
+
+[node name="letter1" type="Sprite2D" parent="deck/bg"]
+position = Vector2(40, 56)
+texture = ExtResource("1_bi0l6")
+
+[node name="letter2" type="Sprite2D" parent="deck/bg"]
+position = Vector2(112, 56)
+texture = ExtResource("1_bi0l6")
+
+[node name="letter3" type="Sprite2D" parent="deck/bg"]
+position = Vector2(184, 56)
+texture = ExtResource("1_bi0l6")
+
+[node name="letter4" type="Sprite2D" parent="deck/bg"]
+position = Vector2(256, 56)
+texture = ExtResource("1_bi0l6")
+
+[node name="letter5" type="Sprite2D" parent="deck/bg"]
+position = Vector2(328, 56)
 texture = ExtResource("1_bi0l6")
 
 [node name="mana" type="TextureButton" parent="."]
@@ -228,4 +263,5 @@ offset_bottom = 128.0
 autowrap_mode = 3
 script = ExtResource("8_3pnmy")
 
+[connection signal="pressed" from="deck" to="deck" method="_on_pressed"]
 [connection signal="pressed" from="mana" to="mana" method="_on_pressed"]

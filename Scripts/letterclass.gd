@@ -36,23 +36,22 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_mb") and button_pressed:
 		if Global.mana >= mana_cost:
-			Global.update_mana(mana_cost)
 			effect_node.effect()
 		else:
 			Global.hand_controler.unselect_letters()
 
 ## invoca uma unidade para o campo (se possivel) baseado na posição do mouse
 ## Quando a unidade é invocada, remove a carta da mão e a adiciona a linha de recarga
-func summon_unit(unit: String) -> void:
+func summon_unit() -> void:
 	var is_used := false
 	for u in range(5):
 		var unit_space = Global.tabuleiro.get_child(u + 5)
 		if unit_space.is_hovered():
 			if Global.units_space[unit_space.get_index()] == null:
-				Global.units_space[unit_space.get_index()] = unit
 				is_used = true
 				unit_space.disabled = false
-				unit_space.texture_normal = Global.UNITS_ATRIBUTES[unit]["texture"]
+				unit_space.set_status(my_letter)
+				Global.update_mana(mana_cost)
 
 	if is_used:
 		Global.letter_in_recharge[letter_info["recharge_time"]-1].append(my_letter)
