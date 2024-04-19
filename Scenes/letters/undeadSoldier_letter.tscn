@@ -1,8 +1,16 @@
 [gd_scene load_steps=8 format=3 uid="uid://q7yvpnccm0fa"]
 
-[ext_resource type="Texture2D" uid="uid://b8b8l4is5qjsi" path="res://Assets/base_letter.png" id="1_esms2"]
-[ext_resource type="Script" path="res://Scripts/letter_scripts/undeadSoldier.gd" id="2_nl5g1"]
 [ext_resource type="PackedScene" uid="uid://d3u2cfl1moqur" path="res://Scenes/effects/summon_unit.tscn" id="3_gto3i"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kha4w"]
+load_path = "res://.godot/imported/base_letter.png-f7043a39df8826049ce61324d83372f6.ctex"
+
+[sub_resource type="GDScript" id="GDScript_wn115"]
+script/source = "extends BaseLetter
+
+func _ready() -> void:
+	init_letter(\"undeadSoldier\")
+"
 
 [sub_resource type="Animation" id="Animation_suf66"]
 length = 0.001
@@ -103,8 +111,8 @@ pivot_offset = Vector2(32, 96)
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
-texture_normal = ExtResource("1_esms2")
-script = ExtResource("2_nl5g1")
+texture_normal = SubResource("CompressedTexture2D_kha4w")
+script = SubResource("GDScript_wn115")
 effect_node = NodePath("effect")
 metadata/_edit_horizontal_guides_ = [48.0]
 
@@ -135,8 +143,9 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="effect" parent="." instance=ExtResource("3_gto3i")]
+[node name="effect" parent="." node_paths=PackedStringArray("letter") instance=ExtResource("3_gto3i")]
 unit = "undeadSoldier"
+letter = NodePath("..")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

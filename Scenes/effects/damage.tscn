@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://deurmlmaxy6mo"]
+
+[ext_resource type="Script" path="res://Scripts/effects/damage.gd" id="1_m2mon"]
+
+[node name="damage" type="Node"]
+script = ExtResource("1_m2mon")
+damage = 2

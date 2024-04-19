@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://Scripts/effects/summon_unit_effect.gd" id="1_tmwvt"]
 
-[node name="effect" type="Node"]
+[node name="summon_unit" type="Node"]
 script = ExtResource("1_tmwvt")

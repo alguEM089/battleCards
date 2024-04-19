@@ -1,8 +1,16 @@
 [gd_scene load_steps=8 format=3 uid="uid://c3ygy7vhb1l7t"]
 
-[ext_resource type="Texture2D" uid="uid://b8b8l4is5qjsi" path="res://Assets/base_letter.png" id="1_cvimv"]
-[ext_resource type="Script" path="res://Scripts/letter_scripts/shilder.gd" id="2_pp8vr"]
 [ext_resource type="PackedScene" uid="uid://d3u2cfl1moqur" path="res://Scenes/effects/summon_unit.tscn" id="3_c7gl4"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3sw6h"]
+load_path = "res://.godot/imported/base_letter.png-f7043a39df8826049ce61324d83372f6.ctex"
+
+[sub_resource type="GDScript" id="GDScript_y2m2t"]
+script/source = "extends BaseLetter
+
+func _ready() -> void:
+	init_letter(\"shilder\")
+"
 
 [sub_resource type="Animation" id="Animation_suf66"]
 length = 0.001
@@ -103,9 +111,9 @@ pivot_offset = Vector2(32, 96)
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
-texture_normal = ExtResource("1_cvimv")
-script = ExtResource("2_pp8vr")
-effect_node = NodePath("effect")
+texture_normal = SubResource("CompressedTexture2D_3sw6h")
+script = SubResource("GDScript_y2m2t")
+effect_node = NodePath("summon_unit")
 metadata/_edit_horizontal_guides_ = [48.0]
 
 [node name="anim" type="AnimationPlayer" parent="."]
@@ -135,8 +143,7 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="effect" parent="." instance=ExtResource("3_c7gl4")]
-unit = "shilder"
+[node name="summon_unit" parent="." instance=ExtResource("3_c7gl4")]
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

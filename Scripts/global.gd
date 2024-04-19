@@ -7,7 +7,7 @@ enum DefenceEffects {SPIKE}
 ## O controlador geral do jogo
 var Controler : GameControler
 ## O tabuleiro onde são invocada as unidades
-var tabuleiro : ColorRect
+var tabuleiro : TabuleiroBase
 ## Label que mostra a quantia de mana atual
 var mana_contain : TextureButton
 ## Linha de racarga que mostra o tempo (em rodadas) para as cartas usadas voltarem para mesa
@@ -40,6 +40,26 @@ const LETTER_ATRIBUTES = {
 		"description" : "Invoca uma unidade de 1 ataque, com 5 de dano e 2 defesa. Se destroi ao atacar.",
 		"mana_cost" : 1, "recharge_time" : 2, "deck_return" : "priority",
 		"deck_buy" : 0, "type" : "Unidade"
+	},
+	"fireBall" : {
+		"description" : "Lança uma bola de fogo de um ataque e 2 de dano",
+		"mana_cost" : 1, "recharge_time" : 1, "deck_return" : "comum",
+		"deck_buy" : 0, "type" : "Magia"
+	},
+	"smallShild" : {
+		"description" : "Adiciona 1 de defesa para uma de suas unidades",
+		"mana_cost" : 1, "recharge_time" : 2, "deck_return" : "comum",
+		"deck_buy" : 0, "type" : "Magia"
+	},
+	"bigShild" : {
+		"description" : "Adiciona 1 de defesa para todas as suas unidades",
+		"mana_cost" : 2, "recharge_time" : 3, "deck_return" : "comum",
+		"deck_buy" : 0, "type" : "Magia"
+	},
+	"fastBuy" : {
+		"description" : "Compra 2 cartas e ganhe 1 de mana",
+		"mana_cost" : 1, "recharge_time" : 4, "deck_return" : "comum",
+		"deck_buy" : 0, "type" : "Movimentação"
 	}
 }
 ## Dicionário que contem o precarregamento das texturas das cartas
@@ -48,14 +68,22 @@ const LETTER_SPRITES = {
 	"soldier" : preload("res://Assets/soldier_letter.png"),
 	"shilder" : preload("res://Assets/shilder_letter.png"),
 	"spikeBall" : preload("res://Assets/spikeBall_letter.png"),
-	"undeadSoldier" : preload("res://Assets/undeadSoldier_letter.png")
+	"undeadSoldier" : preload("res://Assets/undeadSoldier_letter.png"),
+	"fireBall" : preload("res://Assets/fireBall_letter.png"),
+	"smallShild" : preload("res://Assets/smallShild_letter.png"),
+	"bigShild" : preload("res://Assets/bigShild_letter.png"),
+	"fastBuy" : preload("res://Assets/fastBuy_letter.png")
 }
 ## Dicionario que contem o precarregamento das cenas das cartas do jogo
 const LETTER_SCENES := {
 	"soldier" : preload("res://Scenes/letters/soldier_letter.tscn"),
 	"shilder" : preload("res://Scenes/letters/shilder_letter.tscn"),
 	"spikeBall" : preload("res://Scenes/letters/spikeBall_letter.tscn"),
-	"undeadSoldier" : preload("res://Scenes/letters/undeadSoldier_letter.tscn")
+	"undeadSoldier" : preload("res://Scenes/letters/undeadSoldier_letter.tscn"),
+	"fireBall" : preload("res://Scenes/letters/fireBall_letter.tscn"),
+	"smallShild" : preload("res://Scenes/letters/smallShild_letter.tscn"),
+	"bigShild" : preload("res://Scenes/letters/bigShild_letter.tscn"),
+	"fastBuy" : preload("res://Scenes/letters/fastBuy_letter.tscn")
 }
 ## Dicionario que contem os atributos das unidades invocadas em campo (inclui texturas)
 const UNITS_ATRIBUTES = {
@@ -71,7 +99,7 @@ const UNITS_ATRIBUTES = {
 	},
 	"spikeBall" : {
 		"texture" : preload("res://Assets/spike_ball.png"),
-		"power" : 0, "attacks" : 1, "defence" : 3,
+		"power" : 0, "attacks" : 0, "defence" : 3,
 		"attack_effect" : -1, "defence_effect" : DefenceEffects.SPIKE
 	},
 	"undeadSoldier" : {
@@ -95,10 +123,10 @@ var letter_in_deck := []
 ## Controla as cartas que estão na linha de recarga/recarregando
 var letter_in_recharge := [[], [], [], [], []]
 ## controla as unidades que estão em campo
-var units_space := [
-		null, null, null, null, null, 
-		null, null, null, null, null
-]
+#var units_space := [
+		#null, null, null, null, null, 
+		#null, null, null, null, null
+#]
 ### Os valores são do tipo String  e se referen as chaves dos dicionarios 
 ### na região "Dicionarios de controle de atributos"
 #endregion
@@ -106,7 +134,8 @@ var units_space := [
 ## Variavel que contem as cartas escolhidas para a partida atual
 var deck := [
 	"spikeBall", "shilder", "undeadSoldier", "soldier", "shilder",
-	"soldier", "spikeBall", "shilder", "soldier", "soldier"
+	"soldier", "spikeBall", "shilder", "soldier", "soldier",
+	"fireBall", "fireBall", "smallShild","fastBuy","bigShild","fastBuy"
 ]
 
 ## Constante que diz o maximo de mana que o jogador pode ter por rodada
@@ -132,10 +161,18 @@ func buy_letter() -> String:
 
 	return next_letter
 
+func purchage_letters(quant:int, mg:int) -> void:
+	await get_tree().create_timer(.1).timeout
+	for a in range(quant):
+		hand_controler.instance_letter()
+	hand_controler.adjust_letters_pos()
+	
+	update_mana(-mg)
+
 ## Atualiza a mana do jogador, o Label de mana da HUD e impede que tenha mais mana do que "MAX_MANA"
-func update_mana(mana_use: int = 0) -> void:
+func update_mana(mana_use: int = 0, limit_mana:=true) -> void:
 	mana -= mana_use
-	if mana > MAX_MANA:
+	if limit_mana and (mana > MAX_MANA):
 		mana = MAX_MANA
 	mana_contain.update_text()
 

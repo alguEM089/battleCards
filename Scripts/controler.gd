@@ -39,7 +39,8 @@ func _buy_letters(quant:int, buy:=can_buy) -> void:
 	if can_buy:
 		can_buy = false
 		for a in range(quant):
-			Global.hand_controler.instance_letter()
+			if Global.letter_in_hand.size() < Global.MAX_HAND_LETTER:
+				Global.hand_controler.instance_letter()
 		Global.hand_controler.adjust_letters_pos()
 		await Global.hand_controler.IsLetterOk
 		can_buy = true

@@ -1,8 +1,16 @@
 [gd_scene load_steps=8 format=3 uid="uid://bi45yddqv65j7"]
 
-[ext_resource type="Texture2D" uid="uid://b8b8l4is5qjsi" path="res://Assets/base_letter.png" id="1_qkqhs"]
-[ext_resource type="Script" path="res://Scripts/letter_scripts/spikeBall_letter.gd" id="2_cutys"]
 [ext_resource type="PackedScene" uid="uid://d3u2cfl1moqur" path="res://Scenes/effects/summon_unit.tscn" id="3_qk7mq"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_f0i4n"]
+load_path = "res://.godot/imported/base_letter.png-f7043a39df8826049ce61324d83372f6.ctex"
+
+[sub_resource type="GDScript" id="GDScript_l8sg4"]
+script/source = "extends BaseLetter
+
+func _ready() -> void:
+	init_letter(\"spikeBall\")
+"
 
 [sub_resource type="Animation" id="Animation_suf66"]
 length = 0.001
@@ -103,8 +111,8 @@ pivot_offset = Vector2(32, 96)
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
-texture_normal = ExtResource("1_qkqhs")
-script = ExtResource("2_cutys")
+texture_normal = SubResource("CompressedTexture2D_f0i4n")
+script = SubResource("GDScript_l8sg4")
 effect_node = NodePath("effect")
 metadata/_edit_horizontal_guides_ = [48.0]
 
@@ -135,8 +143,9 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="effect" parent="." instance=ExtResource("3_qk7mq")]
+[node name="effect" parent="." node_paths=PackedStringArray("letter") instance=ExtResource("3_qk7mq")]
 unit = "spikeBall"
+letter = NodePath("..")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

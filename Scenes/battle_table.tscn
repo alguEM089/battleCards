@@ -196,6 +196,7 @@ offset_left = 64.0
 offset_top = 528.0
 offset_right = 128.0
 offset_bottom = 624.0
+focus_mode = 0
 toggle_mode = true
 texture_normal = ExtResource("6_vf1dm")
 script = ExtResource("7_qd8rx")
@@ -233,6 +234,7 @@ offset_left = 1024.0
 offset_top = 528.0
 offset_right = 1088.0
 offset_bottom = 624.0
+focus_mode = 0
 texture_normal = ExtResource("2_c1lso")
 script = ExtResource("5_hlen8")
 

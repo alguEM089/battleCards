@@ -44,20 +44,22 @@ func _unhandled_input(event: InputEvent) -> void:
 ## Quando a unidade é invocada, remove a carta da mão e a adiciona a linha de recarga
 func summon_unit() -> void:
 	var is_used := false
-	for u in range(5):
-		var unit_space = Global.tabuleiro.get_child(u + 5)
-		if unit_space.is_hovered():
-			if Global.units_space[unit_space.get_index()] == null:
-				is_used = true
-				unit_space.disabled = false
-				unit_space.set_status(my_letter)
-				Global.update_mana(mana_cost)
+	var unit_space = Global.tabuleiro.get_valid_unit(true)
+	if unit_space != null:
+		if !unit_space.is_summoned:
+			is_used = true
+			unit_space.disabled = false
+			unit_space.set_status(my_letter)
 
 	if is_used:
-		Global.letter_in_recharge[letter_info["recharge_time"]-1].append(my_letter)
-		Global.letter_in_hand.erase(my_letter)
-		Global.recharge_line.update_letters_in_recharge()
-		queue_free()
+		used_letter()
+
+func used_letter() -> void:
+	Global.update_mana(mana_cost)
+	Global.letter_in_recharge[letter_info["recharge_time"]-1].append(my_letter)
+	Global.letter_in_hand.erase(my_letter)
+	Global.recharge_line.update_letters_in_recharge()
+	queue_free()
 
 ## Inicia algumas atributos de controle de acordo com o tipo da carta
 func init_letter(letter:String) -> void:
