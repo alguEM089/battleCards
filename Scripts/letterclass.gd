@@ -1,12 +1,10 @@
 extends TextureButton
 
 class_name BaseLetter
-## Nó que contem a animação da carta sendo "focada" pelo mouse
-@onready var anim: AnimationPlayer = $anim
 ## Label que mostra o custo de mana da carta
-@onready var label_mana_cost: Label = $label_mana_cost
+@onready var label_mana_cost: Label = $labeis/label_mana_cost
 ## Label que mostra o tempo de recarga (em turnos)
-@onready var label_recharge_time: Label = $label_recharge_time
+@onready var label_recharge_time: Label = $labeis/label_recharge_time
 
 @export var effect_node : Effects
 
@@ -87,12 +85,13 @@ func set_values(letter:String) -> void:
 #region responsaveis por aumentar e diminuir a carta quando passa o mouse
 func _on_mouse_entered() -> void:
 	z_index = 1
-	anim.play("select")
+	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(self, "scale", Vector2(1.75, 1.75), 0.1)
 
 func _on_mouse_exited() -> void:
 	z_index = 0
-	anim.play("unselect")
-	get_parent().hide_description()
+	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.1)
 
 #endregion
 

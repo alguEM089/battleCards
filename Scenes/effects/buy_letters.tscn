@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cic3s2wc5pevn"]
+
+[ext_resource type="Script" path="res://Scripts/effects/buy_letters.gd" id="1_274vk"]
+
+[node name="buyLetters" type="Node"]
+script = ExtResource("1_274vk")

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2br3v4o31pb8"]
+
+[ext_resource type="Texture2D" uid="uid://b8b8l4is5qjsi" path="res://Assets/base_letter.png" id="1_dua43"]
+[ext_resource type="PackedScene" uid="uid://ba8gcs1t7b584" path="res://Scenes/labeis.tscn" id="1_jxdp7"]
+[ext_resource type="Script" path="res://Scripts/letter_scripts/spikeBall.gd" id="2_8v7u5"]
+[ext_resource type="PackedScene" uid="uid://d3u2cfl1moqur" path="res://Scenes/effects/summon_unit.tscn" id="4_vdcco"]
+
+[node name="spikeBall" type="TextureButton" node_paths=PackedStringArray("effect_node")]
+offset_left = -32.0
+offset_top = -48.0
+offset_right = 32.0
+offset_bottom = 48.0
+pivot_offset = Vector2(32, 96)
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource("1_dua43")
+script = ExtResource("2_8v7u5")
+effect_node = NodePath("summon_unit")
+
+[node name="labeis" parent="." instance=ExtResource("1_jxdp7")]
+
+[node name="summon_unit" parent="." node_paths=PackedStringArray("letter") instance=ExtResource("4_vdcco")]
+unit = "spikeBall"
+letter = NodePath("..")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

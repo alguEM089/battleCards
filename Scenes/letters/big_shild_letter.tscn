@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://m33oympboxub"]
+
+[ext_resource type="Texture2D" uid="uid://b8b8l4is5qjsi" path="res://Assets/base_letter.png" id="1_f8kue"]
+[ext_resource type="Script" path="res://Scripts/letter_scripts/bigShild.gd" id="2_6os6f"]
+[ext_resource type="PackedScene" uid="uid://ba8gcs1t7b584" path="res://Scenes/labeis.tscn" id="2_umlx0"]
+[ext_resource type="PackedScene" uid="uid://b6hqyefx60p38" path="res://Scenes/effects/defence_all.tscn" id="3_qkcph"]
+
+[node name="bigShild" type="TextureButton" node_paths=PackedStringArray("effect_node")]
+offset_left = -32.0
+offset_top = -48.0
+offset_right = 32.0
+offset_bottom = 48.0
+pivot_offset = Vector2(32, 96)
+toggle_mode = true
+texture_normal = ExtResource("1_f8kue")
+script = ExtResource("2_6os6f")
+effect_node = NodePath("defence_all")
+
+[node name="labeis" parent="." instance=ExtResource("2_umlx0")]
+
+[node name="defence_all" parent="." node_paths=PackedStringArray("letter") instance=ExtResource("3_qkcph")]
+letter = NodePath("..")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ba8gcs1t7b584"]
+
+[node name="labeis" type="Node2D"]
+
+[node name="label_mana_cost" type="Label" parent="."]
+offset_left = 47.0
+offset_top = 56.0
+offset_right = 57.0
+offset_bottom = 88.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="label_recharge_time" type="Label" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 50.0
+offset_top = 6.0
+offset_right = 66.0
+offset_bottom = 38.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -4,4 +4,3 @@
 
 [node name="damage" type="Node"]
 script = ExtResource("1_m2mon")
-damage = 2

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbtalvxa8jegx"]
+
+[ext_resource type="Texture2D" uid="uid://b8b8l4is5qjsi" path="res://Assets/base_letter.png" id="1_r4fwy"]
+[ext_resource type="PackedScene" uid="uid://ba8gcs1t7b584" path="res://Scenes/labeis.tscn" id="2_4dkep"]
+[ext_resource type="Script" path="res://Scripts/letter_scripts/fastBuy.gd" id="2_vo46a"]
+[ext_resource type="PackedScene" uid="uid://cic3s2wc5pevn" path="res://Scenes/effects/buy_letters.tscn" id="3_8uj6g"]
+
+[node name="fastBuy" type="TextureButton" node_paths=PackedStringArray("effect_node")]
+offset_left = -32.0
+offset_top = -48.0
+offset_right = 32.0
+offset_bottom = 48.0
+pivot_offset = Vector2(32, 96)
+toggle_mode = true
+texture_normal = ExtResource("1_r4fwy")
+script = ExtResource("2_vo46a")
+effect_node = NodePath("buyLetters")
+
+[node name="labeis" parent="." instance=ExtResource("2_4dkep")]
+
+[node name="buyLetters" parent="." node_paths=PackedStringArray("letter") instance=ExtResource("3_8uj6g")]
+quant = 2
+letter = NodePath("..")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

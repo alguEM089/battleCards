@@ -1,7 +1,8 @@
 Node
-ColorRect
 TextureButton
-Sprite2D
+BaseLetter
 Node2D
+ColorRect
+Sprite2D
 Label
 AnimationPlayer

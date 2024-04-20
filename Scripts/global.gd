@@ -78,12 +78,12 @@ const LETTER_SPRITES = {
 const LETTER_SCENES := {
 	"soldier" : preload("res://Scenes/letters/soldier_letter.tscn"),
 	"shilder" : preload("res://Scenes/letters/shilder_letter.tscn"),
-	"spikeBall" : preload("res://Scenes/letters/spikeBall_letter.tscn"),
-	"undeadSoldier" : preload("res://Scenes/letters/undeadSoldier_letter.tscn"),
-	"fireBall" : preload("res://Scenes/letters/fireBall_letter.tscn"),
-	"smallShild" : preload("res://Scenes/letters/smallShild_letter.tscn"),
-	"bigShild" : preload("res://Scenes/letters/bigShild_letter.tscn"),
-	"fastBuy" : preload("res://Scenes/letters/fastBuy_letter.tscn")
+	"spikeBall" : preload("res://Scenes/letters/spike_ball_letter.tscn"),
+	"undeadSoldier" : preload("res://Scenes/letters/undead_soldier_letter.tscn"),
+	"fireBall" : preload("res://Scenes/letters/fire_ball_letter.tscn"),
+	"smallShild" : preload("res://Scenes/letters/small_shild_letter.tscn"),
+	"bigShild" : preload("res://Scenes/letters/big_shild_letter.tscn"),
+	"fastBuy" : preload("res://Scenes/letters/fast_buy_letter.tscn")
 }
 ## Dicionario que contem os atributos das unidades invocadas em campo (inclui texturas)
 const UNITS_ATRIBUTES = {
@@ -122,20 +122,14 @@ var letter_in_hand := []
 var letter_in_deck := []
 ## Controla as cartas que estão na linha de recarga/recarregando
 var letter_in_recharge := [[], [], [], [], []]
-## controla as unidades que estão em campo
-#var units_space := [
-		#null, null, null, null, null, 
-		#null, null, null, null, null
-#]
 ### Os valores são do tipo String  e se referen as chaves dos dicionarios 
 ### na região "Dicionarios de controle de atributos"
 #endregion
 
 ## Variavel que contem as cartas escolhidas para a partida atual
 var deck := [
-	"spikeBall", "shilder", "undeadSoldier", "soldier", "shilder",
-	"soldier", "spikeBall", "shilder", "soldier", "soldier",
-	"fireBall", "fireBall", "smallShild","fastBuy","bigShild","fastBuy"
+	"soldier", "soldier", "soldier", "bigShild", "bigShild", "bigShild",
+	"soldier", "soldier", "fastBuy", "fastBuy"
 ]
 
 ## Constante que diz o maximo de mana que o jogador pode ter por rodada
